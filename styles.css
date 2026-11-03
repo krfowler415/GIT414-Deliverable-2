@@ -1,0 +1,218 @@
+/* Desert After Dark - GIT 414 Deliverable 2 CSS Architecture */
+@layer reset, base, layout, components, utilities, states, overrides, print;
+
+@layer reset {
+  *, *::before, *::after { box-sizing: border-box; }
+  body, h1, h2, h3, p, ul { margin: 0; }
+}
+
+@layer base {
+  :root {
+    /* Colors from the Desert After Dark palette reference */
+    --color-deep-night: #11131A;
+    --color-dusk-surface: #1B1C24;
+    --color-rock-umber: #2B2522;
+    --color-prickly-pear: #D97BB4;
+    --color-ocotillo: #F08A4B;
+    --color-palo-verde: #8DBF7A;
+    --color-desert-sand: #D8B98A;
+
+    /* Supporting text colors and semantic uses */
+    --color-text: #EDE8E1;
+    --color-muted: #C5BDB2;
+    --color-background: var(--color-deep-night);
+    --color-surface: var(--color-dusk-surface);
+    --color-link: var(--color-desert-sand);
+    --color-focus: var(--color-desert-sand);
+
+    /* Starting values; typography and spacing may change later */
+    --font-body: Arial, Helvetica, sans-serif;
+    --font-size-body: 1rem;
+    --space-small: 0.5rem;
+    --space-medium: 1rem;
+    --space-large: 1.5rem;
+    --space-section: 3rem;
+    --radius-small: 0.375rem;
+    --radius-card: 0.75rem;
+    --focus-outline: 3px solid var(--color-focus);
+  }
+
+  body {
+    background: var(--color-background);
+    color: var(--color-text);
+    font-family: var(--font-body);
+    font-size: var(--font-size-body);
+    line-height: 1.5;
+  }
+  h1, h2, h3 { line-height: 1.2; }
+  h1 { font-size: 2rem; }
+  h2, h3 { margin-bottom: var(--space-small); }
+  p { margin-bottom: var(--space-medium); }
+  a { color: var(--color-link); }
+}
+
+@layer layout {
+  .container {
+    max-width: 70rem;
+    margin-inline: auto;
+    padding-inline: var(--space-medium);
+  }
+  .header-layout {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-medium);
+  }
+  .hero { padding-block: var(--space-section); }
+  .section { margin-bottom: var(--space-section); }
+  .animal-grid {
+    display: grid;
+    gap: var(--space-medium);
+  }
+  @media (min-width: 45rem) {
+    .animal-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @media (min-width: 68rem) {
+    .animal-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  }
+}
+
+@layer components {
+  .site-header, .site-footer {
+    padding-block: var(--space-large);
+    background: var(--color-surface);
+  }
+  .site-header { border-bottom: 1px solid var(--color-rock-umber); }
+  .site-footer {
+    margin-top: var(--space-section);
+    border-top: 1px solid var(--color-rock-umber);
+  }
+  .site-name { font-weight: bold; margin-bottom: 0; }
+  .nav-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-medium);
+    list-style: none;
+    padding: 0;
+  }
+  .nav-link { text-decoration: none; }
+
+  /* The button has custom properties scoped to this component. */
+  .button {
+    --button-background: var(--color-ocotillo);
+    --button-text: var(--color-deep-night);
+    display: inline-block;
+    padding: var(--space-small) var(--space-large);
+    border: 1px solid var(--button-background);
+    border-radius: var(--radius-small);
+    background: var(--button-background);
+    color: var(--button-text);
+    font-weight: bold;
+    text-decoration: none;
+  }
+
+  .animal-card {
+    overflow: hidden;
+    border: 1px solid var(--color-rock-umber);
+    border-radius: var(--radius-card);
+    background: var(--color-surface);
+  }
+  .animal-card__media {
+    display: grid;
+    place-items: center;
+    min-height: 8rem;
+    padding: var(--space-small);
+    background: var(--color-rock-umber);
+    color: var(--color-muted);
+    font-size: 0.875rem;
+    text-align: center;
+  }
+  .animal-card__body { padding: var(--space-medium); }
+  .animal-card__body p { margin-bottom: 0; }
+  .category-tag {
+    display: inline-block;
+    margin-bottom: var(--space-small);
+    padding: 0.125rem var(--space-small);
+    border: 1px solid var(--color-prickly-pear);
+    border-radius: var(--radius-small);
+    color: var(--color-prickly-pear);
+    font-size: 0.875rem;
+  }
+  .fun-fact {
+    --fact-accent: var(--color-palo-verde);
+    padding: var(--space-large);
+    border: 1px solid var(--fact-accent);
+    border-radius: var(--radius-card);
+    background: var(--color-surface);
+  }
+  .fun-fact h2 { color: var(--fact-accent); }
+
+  .skip-link {
+    position: absolute;
+    left: var(--space-medium);
+    top: -5rem;
+    padding: var(--space-small);
+    background: var(--color-desert-sand);
+    color: var(--color-deep-night);
+  }
+}
+
+@layer utilities {
+  .u-muted { color: var(--color-muted); }
+  .u-max-text { max-width: 60ch; }
+  .u-mb-0 { margin-bottom: 0; }
+}
+
+@layer states {
+  a:hover { text-decoration: underline; }
+  .button:hover {
+    background: var(--color-deep-night);
+    color: var(--color-ocotillo);
+    text-decoration: none;
+  }
+  .button:active {
+    background: var(--color-desert-sand);
+    color: var(--color-deep-night);
+  }
+  .nav-link[aria-current="page"] {
+    border-bottom: 2px solid var(--color-link);
+    font-weight: bold;
+  }
+  :focus-visible {
+    outline: var(--focus-outline);
+    outline-offset: 3px;
+  }
+  .skip-link:focus-visible { top: var(--space-small); }
+}
+
+@layer overrides {
+  /* Reserved for future exceptions; none needed in this preview. */
+}
+
+@layer print {
+  @media print {
+    body { background: white; color: black; font-size: 11pt; }
+    a { color: black; }
+    .site-header nav, .button, .skip-link, .animal-card__media { display: none; }
+    .site-header, .site-footer { background: white; color: black; border: 0; }
+    .hero { padding-block: 1rem; }
+    .section { margin-bottom: 1rem; }
+    .animal-grid { display: block; }
+    .animal-card {
+      margin-bottom: 1rem;
+      border-color: #999;
+      background: white;
+      color: black;
+      break-inside: avoid;
+    }
+    .fun-fact {
+      border-color: #999;
+      background: white;
+      color: black;
+      break-inside: avoid;
+    }
+    .category-tag, .fun-fact h2, .u-muted { color: black; }
+    .category-tag { border-color: #999; }
+  }
+}
