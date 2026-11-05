@@ -11,7 +11,7 @@ I kept everything in one stylesheet since the project is still small. The layers
 Colors and other values:
 The colors are from the Desert After Dark palette I chose. Deep Night is the main background, Dusk Surface is for cards, and Rock Umber is used for the photo placeholders. Orange is for buttons, pink is for animal category tags, green is for the fun-fact box, and sand is for links and focus outlines. I added light text colors so the page is readable against the dark background.
 
-The font, font sizes, spacing, and rounded corners are starting values and not the final design choices. I used Arial for now because it's simple and doesn't require loading a font. The spacing values give me a consistent place to start. I'll probably change some of these as I work on the actual pages. Having them as custom properties should make that easier. I also used a couple of properties just for the button and fun-fact components.
+The font sizes, spacing, and rounded corners are starting values and not the final design choices. I used Arial in the submitted preview because it's simple and doesn't require loading a font. Since then, I've decided to use Figtree for headings and Outfit for body text and navigation. Both fonts are free to use, and I plan to update the CSS when I work on the actual website pages. The spacing values give me a consistent place to start. I'll probably change some of these as I work on the actual pages. Having them as custom properties should make that easier. I also used a couple of properties just for the button and fun-fact components.
 
 
 Components and interactions:
